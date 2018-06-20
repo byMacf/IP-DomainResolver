@@ -19,10 +19,15 @@ def resolve_ip(ip):
 	resolved_ip = socket.gethostbyaddr(ip)
 	resolved_ips.append(tuple([ip, resolved_ip]))
 	print("Resolved '{}' to {}\n".format(ip, resolved_ip))
+	
+def get_addr_info(addr):
+	port = input("Please enter port number: ")
+	info = socket.getaddrinfo(addr, port)
+	print("Information acquired: {}\n".format(info))
 
-while usr_selection != '5':
+while usr_selection != '6':
 	run_times += 1
-	print("1. Domain to IP\n2. IP to hostname\n3. List resolved domains\n4. List resolved IPs\n5. Quit\n\nTimes program has run: {}".format(run_times))
+	print("1. Domain to IP\n2. IP to hostname\n3. Get address information\n4. List resolved domains\n5. List resolved IPs\n6. Quit\n\nTimes program has run: {}".format(run_times))
 	usr_selection = input("Select an option: ")
 	
 	if usr_selection == '1':
@@ -46,6 +51,17 @@ while usr_selection != '5':
 			print("IP not valid")
 			
 	elif usr_selection == '3':
+		address = input("Please enter address to acquire information from: ")
+		if len(address) > 0:
+			try:
+				get_addr_info(address)
+			except (socket.herror, socket.gaierror):
+				print("Could not acquire information relating to '{}'".format(address))
+		else:
+			print("Invalid entry")
+				
+			
+	elif usr_selection == '4':
 		print("\nResolved domains: ")
 		if len(resolved_domains) > 0:
 			for domain in resolved_domains:
@@ -54,7 +70,7 @@ while usr_selection != '5':
 		else:
 			print("No entries\n")
 		
-	elif usr_selection == '4':
+	elif usr_selection == '5':
 		print("\nResolved IPs: ")
 		if len(resolved_ips) > 0:
 			for ip in resolved_ips:
