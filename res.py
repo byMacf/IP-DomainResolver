@@ -27,12 +27,7 @@ def get_addr_info(addr):
 
 while usr_selection != '6':
 	run_times += 1
-	print("1. Domain to IP\n +
-		2. IP to hostname +
-		3. Get address information +
-		4. List resolved domains +
-		5. List resolved IPs +
-		6. Quit\n\nTimes program has run: {}".format(run_times))
+	print("1. Domain to IP\n2. IP to hostname\n3. Get address information\n4. List resolved domains\nList resolved IPs\n6. Quit\n\nTimes program has run: {}".format(run_times))
 	usr_selection = input("Select an option: ")
 	
 	if usr_selection == '1':
